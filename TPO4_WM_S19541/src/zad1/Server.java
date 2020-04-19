@@ -164,10 +164,14 @@ public class Server implements Runnable{
     }
     private void writeResp(SocketChannel sc, String msg)
             throws IOException {
-        StringBuffer remsg = new StringBuffer();
-        remsg.setLength(0);
-        remsg.append(msg);
-        ByteBuffer buf = charset.encode(CharBuffer.wrap(remsg));
-        sc.write(buf);
+        //StringBuffer remsg = new StringBuffer();
+        //remsg.setLength(0);
+        //remsg.append(msg);
+        //ByteBuffer buf = charset.encode(CharBuffer.wrap(remsg));
+        //sc.write(buf);
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        buffer.put(msg.getBytes());
+        buffer.flip();
+        sc.write(buffer);
     }
 }

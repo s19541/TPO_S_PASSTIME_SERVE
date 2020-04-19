@@ -11,7 +11,9 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 
 public class Client{
     Socket clientSocket;
@@ -45,6 +47,7 @@ public class Client{
             client.write(buffer);
             ByteBuffer buffer2 = ByteBuffer.allocate(1024);
             client.read(buffer2);
+            Charset charset  = Charset.forName("ISO-8859-2");
             return new String(buffer2.array()).trim();
         }catch(IOException e){
             System.out.println("Problem with sending request to server");
