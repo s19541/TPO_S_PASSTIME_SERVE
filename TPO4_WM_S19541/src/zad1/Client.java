@@ -11,12 +11,10 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
 public class Client{
-    Socket clientSocket;
     SocketChannel client;
     String host;
     int port;
@@ -28,7 +26,6 @@ public class Client{
     }
     public void connect(){
         try {
-            //clientSocket = new Socket(host, port);
             client = SocketChannel.open(new InetSocketAddress(host, port));
         }catch(IOException e){
             System.out.println("Problem with creating client socket");
@@ -36,11 +33,6 @@ public class Client{
     }
     public String send(String req){
         try {
-            //DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-            //outToServer.writeBytes(req + '\n');
-            //BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            //String answerFromServer = inFromServer.readLine();
-            //return answerFromServer;
             ByteBuffer buffer = ByteBuffer.allocate(1024);
             buffer.put((req+'\n').getBytes());
             buffer.flip();

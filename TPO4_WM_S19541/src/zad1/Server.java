@@ -64,9 +64,6 @@ public class Server implements Runnable{
         new Thread() {
             @Override
             public void run() {
-                try {
-                    this.sleep(1000);
-                }catch(InterruptedException e){}
                 running = false;
                 try {
                     ssc.close();
@@ -75,9 +72,6 @@ public class Server implements Runnable{
         }.start();
     }
     String getServerLog(){
-        try {
-            Thread.sleep(1000);
-        }catch(InterruptedException e){}
         return log;
     }
     @Override
@@ -164,11 +158,6 @@ public class Server implements Runnable{
     }
     private void writeResp(SocketChannel sc, String msg)
             throws IOException {
-        //StringBuffer remsg = new StringBuffer();
-        //remsg.setLength(0);
-        //remsg.append(msg);
-        //ByteBuffer buf = charset.encode(CharBuffer.wrap(remsg));
-        //sc.write(buf);
         ByteBuffer buffer = ByteBuffer.allocate(1024);
         buffer.put(msg.getBytes());
         buffer.flip();
